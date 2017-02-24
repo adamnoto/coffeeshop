@@ -22,16 +22,18 @@ ActiveRecord::Schema.define(version: 20170224104532) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
+    t.decimal  "price",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "properies", force: :cascade do |t|
-    t.string   "name"
-    t.string   "desc"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "properties", force: :cascade do |t|
+    t.string   "name",                      null: false
+    t.string   "desc",                      null: false
+    t.boolean  "nameable",   default: true, null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
 end

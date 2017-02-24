@@ -4,7 +4,7 @@ class CreateItemProperties < ActiveRecord::Migration[5.0]
       t.string :item_id
       t.string :property_id
       t.string :value
-
+      
       t.timestamps
     end
 

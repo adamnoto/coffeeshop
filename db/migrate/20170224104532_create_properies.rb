@@ -1,8 +1,9 @@
 class CreateProperies < ActiveRecord::Migration[5.0]
   def change
-    create_table :properies do |t|
-      t.string :name
-      t.string :desc
+    create_table :properties do |t|
+      t.string :name, null: false
+      t.string :desc, null: false
+      t.boolean :nameable, null: false, default: true
 
       t.timestamps
     end
