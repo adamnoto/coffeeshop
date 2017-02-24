@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170224104532) do
+ActiveRecord::Schema.define(version: 20170224232854) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "item_properties", force: :cascade do |t|
     t.string   "item_id"
@@ -18,7 +21,7 @@ ActiveRecord::Schema.define(version: 20170224104532) do
     t.string   "value"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["item_id", "property_id"], name: "index_item_properties_on_item_id_and_property_id", unique: true
+    t.index ["item_id", "property_id"], name: "index_item_properties_on_item_id_and_property_id", unique: true, using: :btree
   end
 
   create_table "items", force: :cascade do |t|
@@ -26,6 +29,21 @@ ActiveRecord::Schema.define(version: 20170224104532) do
     t.decimal  "price",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.string   "order_id",   null: false
+    t.string   "item_id",    null: false
+    t.string   "quantity",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id", "item_id"], name: "index_order_items_on_order_id_and_item_id", unique: true, using: :btree
+  end
+
+  create_table "orders", id: :string, force: :cascade do |t|
+    t.string   "customer_name", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "properties", force: :cascade do |t|
