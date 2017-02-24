@@ -1,0 +1,2 @@
+class Propery < ApplicationRecord
+end
