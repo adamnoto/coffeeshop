@@ -8,4 +8,7 @@ html
   = javascript_include_tag 'application'
 
   body
-    = yield
+    = render 'layouts/navbar'
+    .container
+      .row.row-offcanvas.row-offcanvas-right
+        = yield
