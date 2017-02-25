@@ -2,4 +2,23 @@
   .jumbotron
     h1 Add item to cart
 
+    div#items-chooser
+      div v-if='allPropertiesSpecified'
+        table.table
+          thead
+            tr
+              th Item
+              th Quantity
+              th Action
+      div v-else=''
+        div.type-choices v-if='currentProperty' :class='currentProperty.name'
+          p
+            | Please select: {{ currentProperty.desc }}
+          a.btn.btn-secondary[
+            href='#'
+            v-for='value in currentPropertyPossibleValues'
+            v-on:click='selectProperty(currentProperty.id, value)'
+            :class='value'
+          ] {{ value }}
+
 = render 'cart'

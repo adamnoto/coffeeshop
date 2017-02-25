@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-PROP_SIZE = Property.create!(name: Property::SIZE, desc: 'The size of the drink')
 PROP_TYPE = Property.create!(name: Property::TYPE, desc: 'Type of the drink', nameable: false)
+PROP_SIZE = Property.create!(name: Property::SIZE, desc: 'The size of the drink')
 
 def create_item(name, price, size:, type:)
   item = Item.create!(

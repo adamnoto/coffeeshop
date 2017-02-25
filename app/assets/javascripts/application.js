@@ -11,6 +11,14 @@
 // about supported directives.
 //
 //= require jquery
+//= require_self
 //= require jquery_ujs
+//= require tether
 //= require bootstrap
+//= require vue
 //= require_tree .
+
+if (!window.gl) {
+    window.gl = {};
+    window.gl.j = jQuery;
+}
