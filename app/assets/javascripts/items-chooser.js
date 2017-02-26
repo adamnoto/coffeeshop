@@ -8,15 +8,12 @@
                     properties: [],
                     itemProperties: {},
                     propertyIndex: 0,
-                    items: []
+                    selectedProperties: {},
+                    items: {}
                 };
             },
 
             computed: {
-                allPropertiesSpecified: function() {
-                    var selPropCount = global.store.state.selectedProperties.length;
-                    return selPropCount == this.properties.length;
-                },
 
                 currentProperty: function() {
                     return this.properties[this.propertyIndex];
@@ -66,14 +63,52 @@
             },
 
             methods: {
+                allPropertiesSpecified: function() {
+                    var selPropCount = Object.keys(this.selectedProperties).length;
+                    return selPropCount == this.properties.length;
+                },
+
                 nextProperty: function() {
                     this.propertyIndex += 1;
                 },
 
                 selectProperty: function(propertyId, value) {
-                    global.store.state.selectedProperties[propertyId] = value;
-                    global.store.saveState();
+                    this.selectedProperties[propertyId] = value;
                     this.nextProperty();
+                },
+
+                filteredItems: function() {
+                    var itemIds = [];
+                    var propertyKeys = Object.keys(this.selectedProperties);
+
+                    for(var i=0; i<propertyKeys.length; i++) {
+                        var propKey = propertyKeys[i];
+                        var selectedValue = this.selectedProperties[propKey];
+                        var allItemsOnThatProperty = this.itemProperties[propKey];
+                        var allItemsSatisfying = [];
+
+                        allItemsOnThatProperty.forEach(function(item) {
+                            if (item.value === selectedValue) {
+                                allItemsSatisfying.push(item.item_id);
+                            }
+                        });
+
+                        if (itemIds.length === 0) { itemIds = allItemsSatisfying; }
+                        else {
+                            itemIds.forEach(function(itemId) {
+                                if (allItemsSatisfying.indexOf(itemId) < 0) {
+                                    delete itemIds[itemIds.indexOf(itemId)];
+                                }
+                            });
+                        }
+                    }
+
+                    var items = [];
+                    itemIds.forEach(function(itemId) {
+                        items.push(this.items[itemId]);
+                    }.bind(this));
+
+                    return items;
                 },
             },
         });

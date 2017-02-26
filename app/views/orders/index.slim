@@ -3,13 +3,18 @@
     h1 Add item to cart
 
     div#items-chooser
-      div v-if='allPropertiesSpecified'
-        table.table
-          thead
-            tr
-              th Item
-              th Quantity
-              th Action
+      div v-if='allPropertiesSpecified()'
+
+        .card-deck
+          .card v-for='item in filteredItems()'
+            img.card-img-top[:src='item.image_name']
+            .card-block
+              h4.card-title() {{ item.name }}
+              p.card-title() {{ item.description }}
+            .card-footer
+              p.price Price: {{ item.price }}
+              a.btn.btn-primary href='#' Add to cart
+
       div v-else=''
         div.type-choices v-if='currentProperty' :class='currentProperty.name'
           p
