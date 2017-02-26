@@ -43,9 +43,8 @@ ActiveRecord::Schema.define(version: 20170226001611) do
   end
 
   create_table "orders", id: :string, force: :cascade do |t|
-    t.string   "customer_name", null: false
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "properties", force: :cascade do |t|

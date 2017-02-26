@@ -12,5 +12,9 @@
         v-on:click='removeItem(itemGroup[0].id)'
       ] &times;
     li.list-group-item.sales-amount Sales amount: {{ salesAmount }}
-    a.list-group-item.list-group-item-action href='#place-order' v-if='salesAmount > 0'
+    a.list-group-item.list-group-item-action[
+      href='#place-order'
+      v-if='salesAmount > 0'
+      v-on:click='placeOrder'
+    ]
       | Place order
