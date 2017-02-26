@@ -1,0 +1,35 @@
+.col-md-12#sales-monitor
+  .row
+    .col-12.col-md-2
+      h2 Filter
+      div v-for='property in properties'
+        .btn-group-vertical role='group'
+          button.btn.btn-secondary.dropdown-toggle[
+            :id='property.id'
+            type='button'
+            data-toggle='dropdown'
+            aria-haspopup='true'
+            aria-expanded='false'
+          ]
+            | {{ property.name }}
+          .dropdown-menu 
+            a.dropdown-item href='#' v-for='choice in propertyPossibleChoices(property.id)'
+              | {{ choice }}
+
+    .col-6.col-md-10
+      .jumbotron
+        h1 Sales monitor
+
+        table.table.table-inverse.table-stripped
+          thead
+            tr
+              th Order
+              th Gross amount
+          tbody
+            tr v-for='order in orders' v-if='orders'
+              td
+                p.ordered-item v-for='item in order.items' v-if='item'
+                  | {{ item.quantity }} &times; {{ itemName(item.id) }}
+              td
+                p() {{ order.sales_gross_amount }}
+            

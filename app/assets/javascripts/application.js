@@ -19,6 +19,7 @@
 //= require_tree .
 
 if (!window.gl) {
-    window.gl = {};
-    window.gl.j = jQuery;
+    window.gl = {}; // instantiate the holder for user-defined functions scoped to Coffeeshop
+    window.gl.j = jQuery; // aliasing jQuery, less dependent in case we want to switch using jQuery alternative
+    window.gl.h = {}; // user-defined helper methods
 }

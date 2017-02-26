@@ -24,19 +24,7 @@
                 },
 
                 currentPropertyPossibleValues: function() {
-                    var values = [];
-                    var items = this.itemProperties[this.currentProperty.id];
-
-                    if (items) {
-                        for(var i=0; i<items.length; i++) {
-                            var item = items[i].value;
-                            if (values.indexOf(item) < 0) {
-                                values.push(item)
-                            }
-                        }
-                    }
-
-                    return values;
+                    return global.h.propertyPossibleChoices(this.currentProperty.id, this.itemProperties);
                 },
             },
 
