@@ -16,14 +16,23 @@
 
                     Object.keys(this.orderedItems).forEach(function(itemId) {
                         var items = this.orderedItems[itemId];
-                        var qty = items.length;
-                        grossAmount += (qty * items[0].price);
+                        if (items.length > 0) {
+                            var qty = items.length;
+                            grossAmount += (qty * items[0].price);
+                        }
                     }.bind(this));
 
                     grossAmount = Number(Math.round(grossAmount.toString() + 'e2') + 'e-2').toFixed(2);
                     return grossAmount;
                 }
             },
+
+            methods: {
+                removeItem: function(itemId) {
+                    this.orderedItems[itemId].pop();
+                    global.store.saveState();
+                },
+            }
         });
     });
 })(window.gl);

@@ -1,9 +1,16 @@
 .col-6.col-md-3.sidebar-offcanvas#order-cart
   .list-group
-    li.list-group-item[
+    li.list-group-item.justify-content-between[
       href='#'
       v-for='itemGroup in orderedItems'
+      v-if='itemGroup[0]'
     ]
-      span.badge.badge-default() {{ itemGroup.length }}
-      |&nbsp;{{ itemGroup[0].name }}
+      span
+        span.badge.badge-default() {{ itemGroup.length }}
+        |&nbsp;{{ itemGroup[0].name }}
+      span.badge.badge-default.badge-pill.cancel-item[
+        v-on:click='removeItem(itemGroup[0].id)'
+      ] &times;
     li.list-group-item.sales-amount Sales amount: {{ salesAmount }}
+    a.list-group-item.list-group-item-action href='#place-order' v-if='salesAmount > 0'
+      | Place order

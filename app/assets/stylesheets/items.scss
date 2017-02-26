@@ -17,8 +17,28 @@
 }
 
 #order-cart {
-  li.list-group-item.sales-amount {
-    background: #636c72;
-    color: white;
+  li.list-group-item {
+    &.sales-amount {
+      background: #636c72;
+      color: white;
+    }
+
+    &:hover {
+      > .cancel-item {
+        display: inline-block;
+      }
+    }
+
+    .cancel-item {
+      background: white;
+      color: #636c72;
+      cursor: pointer;
+      font-size: 1em;
+      display: none;
+      &:hover {
+        background: #636c72;
+        color: white;
+      }
+    }
   }
 }
