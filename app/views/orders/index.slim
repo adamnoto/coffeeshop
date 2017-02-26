@@ -4,7 +4,6 @@
 
     div#items-chooser
       div v-if='allPropertiesSpecified()'
-
         .card-group
           .card v-for='item in filteredItems()'
             img.card-img-top[:src='item.image_name']
@@ -28,5 +27,12 @@
             v-on:click='selectProperty(currentProperty.id, value)'
             :class='value'
           ] {{ value }}
+
+      br
+      a[
+        href='#back'
+        v-if='propertyIndex > 0'
+        v-on:click='previousProperty'
+      ] Back
 
 = render 'cart'

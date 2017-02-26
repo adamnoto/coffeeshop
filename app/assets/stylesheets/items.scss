@@ -3,6 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #items-chooser {
+  .btn.btn-primary {
+    color: white !important;
+  }
+
   .card {
     width: 20rem;
     img.card-img-top {

@@ -8,13 +8,16 @@
                     properties: [],
                     itemProperties: {},
                     propertyIndex: 0,
-                    selectedProperties: {},
                     items: {},
-                    sharedState: global.state,
+                    sharedState: global.store.state,
                 };
             },
 
             computed: {
+                selectedProperties: function() {
+                    return this.sharedState.selectedProperties;
+                },
+
                 currentProperty: function() {
                     return this.properties[this.propertyIndex];
                 },
@@ -72,6 +75,11 @@
                     this.propertyIndex += 1;
                 },
 
+                previousProperty: function() {
+                    delete this.sharedState.selectedProperties[this.propertyIndex];
+                    this.propertyIndex -= 1;
+                },
+
                 selectProperty: function(propertyId, value) {
                     this.selectedProperties[propertyId] = value;
                     this.nextProperty();
@@ -99,11 +107,13 @@
                         var allItemsOnThatProperty = this.itemProperties[propKey];
                         var allItemsSatisfying = [];
 
-                        allItemsOnThatProperty.forEach(function(item) {
-                            if (item.value === selectedValue) {
-                                allItemsSatisfying.push(item.item_id);
-                            }
-                        });
+                        if (allItemsOnThatProperty) {
+                            allItemsOnThatProperty.forEach(function(item) {
+                                if (item.value === selectedValue) {
+                                    allItemsSatisfying.push(item.item_id);
+                                }
+                            });
+                        }
 
                         if (itemIds.length === 0) { itemIds = allItemsSatisfying; }
                         else {
