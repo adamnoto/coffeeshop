@@ -1,5 +1,6 @@
 (function(global) {
     global.j('document').ready(function() {
+        if (global.j('#order-cart').length != 1) { return; }
         var cart = new Vue({
             el: '#order-cart',
 

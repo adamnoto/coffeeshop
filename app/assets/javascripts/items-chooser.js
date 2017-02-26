@@ -1,5 +1,6 @@
 (function(global) {
     global.j('document').ready(function() {
+        if (global.j('#items-chooser').length != 1) { return; }
         var itemsChooser = new Vue({
             el: '#items-chooser',
 

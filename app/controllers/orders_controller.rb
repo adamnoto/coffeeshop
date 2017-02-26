@@ -3,6 +3,21 @@ class OrdersController < ApplicationController
   end
 
   def index
+    all_orders = Order.all.order('created_at DESC').
+      includes(:order_items).
+      map do |order|
+        order.attributes.merge(items: order.order_items.map do |order_item|
+          {
+            id: order_item.item_id,
+            quantity: order_item.quantity
+          }
+        end)
+      end
+
+    respond_to do |format|
+      format.html { }
+      format.json { render json: all_orders }
+    end
   end
 
   def create
