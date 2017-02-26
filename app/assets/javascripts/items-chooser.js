@@ -9,12 +9,12 @@
                     itemProperties: {},
                     propertyIndex: 0,
                     selectedProperties: {},
-                    items: {}
+                    items: {},
+                    sharedState: global.state,
                 };
             },
 
             computed: {
-
                 currentProperty: function() {
                     return this.properties[this.propertyIndex];
                 },
@@ -75,6 +75,18 @@
                 selectProperty: function(propertyId, value) {
                     this.selectedProperties[propertyId] = value;
                     this.nextProperty();
+                },
+
+                addItemToCart: function(itemId) {
+                    var item = this.items[itemId];
+                    var orderedItems = global.store.state.orderedItems;
+
+                    if (!orderedItems[itemId]) {
+                        Vue.set(orderedItems, itemId, []);
+                    }
+
+                    orderedItems[itemId].push(item);
+                    global.store.saveState();
                 },
 
                 filteredItems: function() {

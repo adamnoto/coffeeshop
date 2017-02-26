@@ -1,24 +1,6 @@
-# README
+# Coffeeshop
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This support:
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Adding multiple quantity of product by adding-to-cart the item more than 1
+- Displaying image of the product

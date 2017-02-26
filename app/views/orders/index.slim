@@ -5,7 +5,7 @@
     div#items-chooser
       div v-if='allPropertiesSpecified()'
 
-        .card-deck
+        .card-group
           .card v-for='item in filteredItems()'
             img.card-img-top[:src='item.image_name']
             .card-block
@@ -13,7 +13,10 @@
               p.card-title() {{ item.description }}
             .card-footer
               p.price Price: {{ item.price }}
-              a.btn.btn-primary href='#' Add to cart
+              a.btn.btn-primary[
+                href='#add-to-cart'
+                v-on:click='addItemToCart(item.id)'
+              ] Add to cart
 
       div v-else=''
         div.type-choices v-if='currentProperty' :class='currentProperty.name'

@@ -1,11 +1,14 @@
 (function(global) {
+    // when updating/changing the shared schema, increase the data version
+    // inspired by Erlang/Elixir.
+    var DATA_VERSION = 2;
+
     var store = {
         STORAGE_KEY: 'COFFEESHOP_STORAGE',
 
         state: {
-            propertyCount: 0,
-            // mapping of propertyId with the value for that property
-            selectedProperties: {},
+            orderedItems: {},
+            dataVersion: DATA_VERSION,
         },
 
         saveState: function() {
@@ -15,7 +18,13 @@
 
         loadState: function() {
             var stateData = JSON.parse(localStorage.getItem(this.STORAGE_KEY));
-            if (stateData) { this.state = stateData; }
+            console.log("Current schema: ", this.state.dataVersion, " needed schema version: ", DATA_VERSION);
+            if (stateData && stateData.dataVersion === DATA_VERSION) {
+                this.state = stateData;
+                console.log("State loaded", this.state);
+            } else {
+                console.error("Unable to load state, different schema versioning");
+            }
         }
     };
 
@@ -23,6 +32,5 @@
     global.store = new Vue({
         data: store
     });
-
-    console.log("Loaded state", global.store.state);
+    console.log("STATE USED", store.state);
 })(window.gl);
