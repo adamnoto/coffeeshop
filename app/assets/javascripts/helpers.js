@@ -16,4 +16,8 @@
 
         return values;
     }
+
+    global.h.properRoundingStr = function(amount) {
+        return Number(Math.round(amount.toString() + 'e2') + 'e-2').toFixed(2);
+    }
 })(window.gl);

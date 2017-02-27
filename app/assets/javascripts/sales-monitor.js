@@ -92,6 +92,15 @@
                     }
 
                     return filteredOrders;
+                },
+
+                totalSales: function() {
+                    var amount = 0;
+                    Object.keys(this.filteredOrders).forEach(function(orderId) {
+                        var orderData = this.filteredOrders[orderId];
+                        amount += Number(this.salesGrossAmount(orderData));
+                    }.bind(this));
+                    return global.h.properRoundingStr(amount);
                 }
             },
 
@@ -117,7 +126,7 @@
                         }.bind(this));
                     }
 
-                    return amount;
+                    return global.h.properRoundingStr(amount);
                 },
 
                 applyFilter: function(propertyId, choice) {

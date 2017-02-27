@@ -32,8 +32,6 @@
 
     .col-6.col-md-10
       .jumbotron
-        h1 Sales monitor
-
         table.table.table-inverse.table-stripped v-if='anyFilteredOrders'
           thead
             tr
@@ -46,6 +44,9 @@
                   | {{ item.quantity }} &times; {{ itemName(item.id) }}
               td
                 p() {{ salesGrossAmount(order) }}
+            tr.total-sales
+              td Total sales
+              td() {{ totalSales }}
 
         div v-else=''
           h4 No order satisfy your filter

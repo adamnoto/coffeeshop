@@ -26,7 +26,7 @@
                         }
                     }.bind(this));
 
-                    grossAmount = Number(Math.round(grossAmount.toString() + 'e2') + 'e-2').toFixed(2);
+                    grossAmount = global.h.properRoundingStr(grossAmount);
                     return grossAmount;
                 }
             },
