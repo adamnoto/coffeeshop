@@ -8,8 +8,6 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'
-gem 'activeadmin', '~> 1.0.0.pre4'
-gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 gem 'vuejs-rails'
 
 # Use sqlite3 as the database for Active Record
