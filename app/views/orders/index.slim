@@ -13,23 +13,39 @@
           ]
             | {{ property.name }}
           .dropdown-menu 
-            a.dropdown-item href='#' v-for='choice in propertyPossibleChoices(property.id)'
-              | {{ choice }}
+            a.dropdown-item[
+              href='#'
+              v-for='choice in propertyPossibleChoices(property.id)'
+              v-on:click='applyFilter(property.id, choice)'
+              :class='isActiveFilter(property.id, choice)'
+            ] {{ choice }}
+            a.dropdown-item[
+              href='#'
+              v-on:click='deleteFilter(property.id)'
+              :class='isActiveFilter(property.id, "__all")'
+            ] all
+      .btn-group-vertical role='group'
+        button.btn.btn-secondary[
+          type='button'
+          v-on:click='clearFilters'
+        ] clear filter
 
     .col-6.col-md-10
       .jumbotron
         h1 Sales monitor
 
-        table.table.table-inverse.table-stripped
+        table.table.table-inverse.table-stripped v-if='anyFilteredOrders'
           thead
             tr
               th Order
               th Gross amount
           tbody
-            tr v-for='order in orders' v-if='orders'
+            tr v-for='order in filteredOrders' v-if='orders && order.items.length > 0'
               td
                 p.ordered-item v-for='item in order.items' v-if='item'
                   | {{ item.quantity }} &times; {{ itemName(item.id) }}
               td
-                p() {{ order.sales_gross_amount }}
-            
+                p() {{ salesGrossAmount(order) }}
+
+        div v-else=''
+          h4 No order satisfy your filter

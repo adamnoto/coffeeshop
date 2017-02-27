@@ -10,10 +10,7 @@ class OrdersController < ApplicationController
       items = order.order_items.map do |order_item|
         {id: order_item.item_id, quantity: order_item.quantity}
       end
-      order.attributes.merge({
-        items: items,
-        sales_gross_amount: order.sales_gross_amount
-      })
+      order.attributes.merge(items: items)
     end
 
     all_orders = all_orders.map do |order_hash|
